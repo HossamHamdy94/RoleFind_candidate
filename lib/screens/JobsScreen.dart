@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 
 
-class JobsScreen extends StatelessWidget {
+
+
+class JobScreen extends StatefulWidget {
   static const String id = 'JobsScreen';
+
+  @override
+  _JobScreen createState() => _JobScreen();
+}
+class _JobScreen extends State <JobScreen> {
 
   @override
   Widget build(BuildContext context) {

@@ -1,15 +1,13 @@
 import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rolefind/compenents/constants.dart';
 import 'package:rolefind/compenents/rounded_button.dart';
-import 'package:rolefind/compenents/user_model.dart';
+import 'file:///D:/apps/rolefind/lib/Models/user_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:rolefind/screens/Jobs.dart';
+import 'package:rolefind/screens/JobsScreen.dart';
 import 'package:rolefind/screens/registrationscreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -104,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   try {
                     UserModel user = await login(email, password);
                     if (user != null) {
-                      Navigator.pushNamed(context, JobsScreen.id);
+                      Navigator.pushNamed(context, JobScreen.id);
                     }
                     setState(() {
                       showSpinner = false;

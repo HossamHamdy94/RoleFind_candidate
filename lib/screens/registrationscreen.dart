@@ -4,10 +4,10 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rolefind/compenents/constants.dart';
 import 'package:rolefind/compenents/rounded_button.dart';
 import 'package:http/http.dart' as http;
-import 'package:rolefind/compenents/user_model.dart';
+import 'file:///D:/apps/rolefind/lib/Models/user_model.dart';
 import 'package:rolefind/screens/login_screen.dart';
 
-import 'Jobs.dart';
+import 'JobsScreen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';
@@ -151,7 +151,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       final UserModel newUser =
                           await createUser("hossam", email, "dev", password);
                       if (newUser != null) {
-                        Navigator.pushNamed(context, JobsScreen.id);
+                        Navigator.pushNamed(context, JobScreen.id);
                       }
                       setState(() {
                         _user = newUser;

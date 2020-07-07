@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rolefind/screens/Jobs.dart';
+import 'package:rolefind/screens/JobsScreen.dart';
 import 'package:rolefind/screens/login_screen.dart';
 import 'package:rolefind/screens/registrationscreen.dart';
-import 'package:rolefind/screens/Jobs.dart';
+import 'package:rolefind/screens/JobsScreen.dart';
 
 
 void main() {
@@ -27,7 +27,7 @@ class Rolefind extends StatelessWidget {
     routes: {
     LoginScreen.id: (context) => LoginScreen(),
       RegistrationScreen.id:(context) => RegistrationScreen(),
-      JobsScreen.id :(context)=> JobsScreen(),
+      JobScreen.id :(context)=> JobScreen(),
   },
     );
   }
