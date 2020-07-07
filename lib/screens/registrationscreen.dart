@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:rolefind/api/API.dart';
 import 'package:rolefind/compenents/constants.dart';
 import 'package:rolefind/compenents/rounded_button.dart';
-import 'package:http/http.dart' as http;
-import 'file:///D:/apps/rolefind/lib/Models/user_model.dart';
-import 'package:rolefind/screens/login_screen.dart';
-
 import 'JobsScreen.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -40,30 +37,7 @@ bool validateEmail(String value) {
   }
 }
 
-Future<UserModel> createUser(
-    String name, String email, String industry, String password) async {
-  final String apiUrl = "https://api.rolefind.com/api/v0.6.1/user-auth/create";
-  final response = await http.post(apiUrl, body: {
-    "name": name,
-    "email": email,
-    "title": industry,
-    "password": password,
-  });
-
-  print(response.body);
-  if (response.statusCode == 201) {
-    print(response.body);
-    final String responseString = response.body;
-
-    return userModelFromJson(responseString);
-  } else {
-    return null;
-  }
-}
-
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  UserModel _user;
-
   bool showSpinner = false;
   String email;
   String password;
@@ -96,7 +70,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
-                  if (validateEmail(value)) email = value;
+               email = value;
                 },
                 decoration:
                     kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
@@ -148,13 +122,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   } else {
                     print(validateEmail(email).toString());
                     try {
-                      final UserModel newUser =
-                          await createUser("hossam", email, "dev", password);
+                      var newUser = await API.createUser(
+                          "hossam", email, "dev", password);
                       if (newUser != null) {
                         Navigator.pushNamed(context, JobScreen.id);
                       }
                       setState(() {
-                        _user = newUser;
                         showSpinner = false;
                       });
                     } catch (e) {

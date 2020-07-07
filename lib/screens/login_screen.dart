@@ -1,12 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:rolefind/api/API.dart';
 import 'package:rolefind/compenents/constants.dart';
 import 'package:rolefind/compenents/rounded_button.dart';
-import 'file:///D:/apps/rolefind/lib/Models/user_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:rolefind/screens/JobsScreen.dart';
 import 'package:rolefind/screens/registrationscreen.dart';
 
@@ -15,26 +13,6 @@ class LoginScreen extends StatefulWidget {
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
-}
-
-Future<UserModel> login(String email, String password) async {
-  final String apiUrl = "https://api.rolefind.com/api/v0.6.1/user-auth/login";
-  dynamic response = await http.post(apiUrl, body: {
-    "email": email,
-    "password": password,
-  });
-  final String res = response.body;
-  final JsonDecoder _decoder = new JsonDecoder();
-  dynamic decoded = _decoder.convert(res);
-  if (response.statusCode == 201) {
-    print(response);
-
-    print(decoded["user"]["email"]);
-    return userModelFromJson(res);
-  } else {
-    throw new Exception(decoded["errorCode"]);
-    print(response.body);
-  }
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -100,9 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     showSpinner = true;
                   });
                   try {
-                    UserModel user = await login(email, password);
+                    var user = await API.login(email, password);
                     if (user != null) {
-                      Navigator.pushNamed(context, JobScreen.id);
+                      Navigator.pushReplacementNamed(context, JobScreen.id);
+
                     }
                     setState(() {
                       showSpinner = false;
@@ -120,7 +99,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     setState(() {
                       showSpinner = false;
                     });
-
                   }
                 },
               ),
