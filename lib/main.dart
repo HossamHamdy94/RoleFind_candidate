@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rolefind/Models/ui.dart';
 import 'package:rolefind/screens/JobsScreen.dart';
+import 'package:rolefind/screens/Jobscreen.dart';
 import 'package:rolefind/screens/login_screen.dart';
 import 'package:rolefind/screens/registrationscreen.dart';
 import 'package:rolefind/screens/JobsScreen.dart';
@@ -28,6 +30,8 @@ class Rolefind extends StatelessWidget {
     LoginScreen.id: (context) => LoginScreen(),
       RegistrationScreen.id:(context) => RegistrationScreen(),
       JobScreen.id :(context)=> JobScreen(),
+      RecentChats.id : (context) => RecentChats(),
+      JobCard.id : (context) => JobCard()
   },
     );
   }

@@ -16,7 +16,7 @@ class API {
       final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
     
 
-      print("hhhhhhhhhhhhhhhhhhhhhhhh"+parsed.toString());
+      print(parsed.toString());
       return parsed.map<Job>((item) => Job.fromJson(item)).toList();
     } else {
       //print('Error');
