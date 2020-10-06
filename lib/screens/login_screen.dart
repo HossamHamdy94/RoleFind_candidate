@@ -7,6 +7,7 @@ import 'package:rolefind/compenents/constants.dart';
 import 'package:rolefind/compenents/rounded_button.dart';
 import 'package:rolefind/screens/JobsScreen.dart';
 import 'package:rolefind/screens/registrationscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -18,6 +19,10 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
 
+  addStringToSF(String tokenvalue) async  {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('tokenkey', tokenvalue);
+  }
   //final _auth = FirebaseAuth.instance;
   String email;
   String password;
@@ -79,10 +84,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   });
                   try {
                     var user = await API.login(email, password);
+                    print ("hosssssam" + user.tokens.accessToken.toString());
                     if (user != null) {
+
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      prefs.setString('useToken', user.tokens.accessToken);
+                      ;
+
                       Navigator.pushReplacementNamed(context, JobScreen.id);
 
-                    }
+                      }
                     setState(() {
                       showSpinner = false;
                     });

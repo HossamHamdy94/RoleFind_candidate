@@ -5,17 +5,19 @@ import 'package:rolefind/screens/Jobscreen.dart';
 import 'package:rolefind/screens/login_screen.dart';
 import 'package:rolefind/screens/registrationscreen.dart';
 import 'package:rolefind/screens/JobsScreen.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(Rolefind());
 }
 
 class Rolefind extends StatelessWidget {
+  String route ;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
+
+      theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.deepOrange[800],
         accentColor: Colors.deepOrangeAccent[600],
@@ -24,6 +26,8 @@ class Rolefind extends StatelessWidget {
     headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
     bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
     ),),
+
+
 
       initialRoute: LoginScreen.id,
     routes: {
@@ -36,3 +40,12 @@ class Rolefind extends StatelessWidget {
     );
   }
   }
+Future<bool> showLoginPage() async {
+  var sharedPreferences = await SharedPreferences.getInstance();
+  String stringValue = sharedPreferences.getString('useToken');
+if (stringValue == null) {
+  return true ;
+}
+else {return false; }
+
+}

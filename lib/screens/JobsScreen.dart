@@ -35,8 +35,11 @@ class _HomeState extends State<JobScreen> {
           future: API.getAllJobs(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+
               var Location ;
               return Container(
+
+
 
                 // width: double.infinity,
                 child: ListView.builder(
